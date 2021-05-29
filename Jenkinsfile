@@ -22,7 +22,8 @@ pipeline {
 
     stage('Archive') {
       steps {
-        archiveArtifacts(artifacts: 'package*.json, src/**', excludes: 'node_modules', onlyIfSuccessful: true)
+        sh 'zip package*.json src/** archive.zip'
+        archiveArtifacts(artifacts: 'archive.zip', onlyIfSuccessful: true)
       }
     }
 
