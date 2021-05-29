@@ -9,7 +9,8 @@ pipeline {
 
       }
       steps {
-        sh '''npm install
+        sh '''sudo chown -R 1001:1001 "/.npm"
+npm install
 '''
       }
     }
