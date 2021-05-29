@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'node:14-alpine'
+      image 'node:14'
     }
 
   }
@@ -24,6 +24,7 @@ pipeline {
       steps {
         sh 'zip package*.json src/** archive.zip'
         archiveArtifacts(artifacts: 'archive.zip', onlyIfSuccessful: true)
+        sh 'apt install zip'
       }
     }
 
