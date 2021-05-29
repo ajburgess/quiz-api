@@ -1,14 +1,22 @@
 pipeline {
-  agent {
-    node {
-      label '14'
+  agent any
+  stages {
+    stage('Build') {
+      agent {
+        docker {
+          image 'node:14'
+        }
+
+      }
+      steps {
+        sh '''npm install
+'''
+      }
     }
 
-  }
-  stages {
-    stage('Stage 1') {
+    stage('Test') {
       steps {
-        sh 'echo "Hello!"'
+        sh 'npm run test'
       }
     }
 
