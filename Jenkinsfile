@@ -41,7 +41,7 @@ zip ../app.zip -r *'''
     stage('Deploy to EBS') {
       steps {
         withAWS(credentials: 'qa-tutor') {
-          ebCreateApplicationVersion(s3Bucket: 'quiz-api-deploy', versionLabel: 'V2', applicationName: 'quiz-api-deploy', s3Key: 'app.zip')
+          ebCreateApplicationVersion(s3Bucket: 'quiz-api-deploy', versionLabel: 'V2', applicationName: 'quiz-api-ajb', s3Key: 'app.zip')
         }
 
       }
