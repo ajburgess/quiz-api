@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'node:14'
+      image 'node:14-buster'
     }
 
   }
@@ -22,7 +22,6 @@ pipeline {
 
     stage('Archive') {
       steps {
-        sh 'sudo apt install zip'
         sh 'zip package*.json src/** archive.zip'
         archiveArtifacts(artifacts: 'archive.zip', onlyIfSuccessful: true)
       }
