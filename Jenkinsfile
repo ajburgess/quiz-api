@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    dockerfile {
-      filename 'xyz.docker'
+    docker {
+      image 'node:14-buster'
     }
 
   }
