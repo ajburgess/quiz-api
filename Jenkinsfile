@@ -22,7 +22,7 @@ pipeline {
 
     stage('Archive') {
       steps {
-        sh 'apt install zip'
+        sh 'sudo apt install zip'
         sh 'zip package*.json src/** archive.zip'
         archiveArtifacts(artifacts: 'archive.zip', onlyIfSuccessful: true)
       }
