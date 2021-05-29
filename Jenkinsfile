@@ -44,6 +44,15 @@ zip ../app.zip -r *'''
       }
     }
 
+    stage('Create version') {
+      steps {
+        withAWS(credentials: 'qa-tutor') {
+          ebCreateApplicationVersion(applicationName: 'quiz-api-ajb', versionLabel: 'FromS3', s3Bucket: 'quiz-api-deploy', s3Key: 'app.zip')
+        }
+
+      }
+    }
+
   }
   environment {
     HOME = '.'
