@@ -1,16 +1,14 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'node:14'
+    }
+
+  }
   stages {
     stage('Build') {
-      agent {
-        docker {
-          image 'node:14'
-        }
-
-      }
       steps {
-        sh '''chown -R 1001:1001 "/.npm"
-npm install
+        sh '''npm install
 '''
       }
     }
