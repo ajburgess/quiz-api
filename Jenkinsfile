@@ -22,7 +22,10 @@ pipeline {
 
     stage('Archive') {
       steps {
-        sh 'zip archive.zip package*.json src/**/*'
+        sh '''rm app.zip
+zip app.zip package*.json
+cd src
+zip ../app.zip -r *'''
         archiveArtifacts(artifacts: 'archive.zip', onlyIfSuccessful: true)
       }
     }
