@@ -20,6 +20,12 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        archiveArtifacts(artifacts: 'package*.json; src/**', excludes: 'node_modules', onlyIfSuccessful: true)
+      }
+    }
+
   }
   environment {
     HOME = '.'
