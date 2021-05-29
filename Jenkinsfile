@@ -40,7 +40,7 @@ zip ../app.zip -r *'''
 
     stage('Deploy to EBS') {
       steps {
-        awsebReleaser(credentialId: 'qa-tutor', awsRegion: 'eu-west-2', applicationName: 'quiz-api-ajb', environmentId: 'quiz-api-ajb-prod', versionLabel: 'Sample Application')
+        awsebReleaser(credentialId: 'qa-tutor', awsRegion: 'eu-west-2', applicationName: 'quiz-api-ajb', environmentId: 'quizapiajb-prod', versionLabel: 'Sample Application')
       }
     }
 
