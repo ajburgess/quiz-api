@@ -32,7 +32,7 @@ zip ../app.zip -r *'''
     stage('Upload to S3') {
       steps {
         withAWS(credentials: 'qa-tutor') {
-          s3Upload(bucket: 'arn:aws:s3:::quiz-api-deploy', file: 'app.zip')
+          s3Upload(bucket: 'quiz-api-deploy', file: 'app.zip')
         }
 
       }
