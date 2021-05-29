@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'node-14-buster-slim'
+      image 'node:14-buster-slim'
     }
 
   }
