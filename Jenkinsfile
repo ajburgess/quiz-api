@@ -20,9 +20,9 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('Archive') {
       steps {
-        archiveArtifacts(artifacts: 'package*.json; src/**', excludes: 'node_modules', onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: 'package*.json, src/**', excludes: 'node_modules', onlyIfSuccessful: true)
       }
     }
 
