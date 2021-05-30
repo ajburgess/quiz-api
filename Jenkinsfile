@@ -47,22 +47,13 @@ zip ../app.zip -r *'''
                     applicationName: 'quiz-api-ajb',
                     environmentName: 'quizapiajb-prod',
                     rootObject: '.',
-                    includes: 'package*.json, **/*',
+                    includes: 'package*.json, src/*',
                     excludes: '',
                     bucketName: 'quiz-api-deploy',
                     keyPrefix: '',
-                    versionLabelFormat: "V4",
-                    versionDescriptionFormat: "V4",
-                    sleepTime: '10',
-                    checkHealth: 'true',
-                    maxAttempts: '12'
+                    versionLabelFormat: "V5",
+                    versionDescriptionFormat: "V5"
                   ])
-        }
-      }
-
-      stage('Deploy to EBS') {
-        steps {
-          awsebReleaser(credentialId: 'qa-tutor', awsRegion: 'eu-west-2', applicationName: 'quiz-api-ajb', environmentId: 'e-pepkykhj6m', versionLabel: 'Sample Application')
         }
       }
 
