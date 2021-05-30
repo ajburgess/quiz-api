@@ -41,33 +41,33 @@ zip ../app.zip -r *'''
     stage('Create version') {
       steps {
         step([
-          $class: 'AWSEBDeploymentBuilder',
-          credentialId: "qa-tutor",
-          awsRegion: 'eu-west-2',
-          applicationName: 'quiz-api-ajb',
-          environmentName: 'quizapiajb-prod',
-          rootObject: '.',
-          includes: 'package*.json, **/*',
-          excludes: '',
-          bucketName: 'quiz-api-deploy',
-          keyPrefix: '',
-          versionLabelFormat: "V4",
-          versionDescriptionFormat: "V4",
-          sleepTime: '10',
-          checkHealth: 'true',
-          maxAttempts: '12'
-        ])
+                    $class: 'AWSEBDeploymentBuilder',
+                    credentialId: "qa-tutor",
+                    awsRegion: 'eu-west-2',
+                    applicationName: 'quiz-api-ajb',
+                    environmentName: 'quizapiajb-prod',
+                    rootObject: '.',
+                    includes: 'package*.json, **/*',
+                    excludes: '',
+                    bucketName: 'quiz-api-deploy',
+                    keyPrefix: '',
+                    versionLabelFormat: "V4",
+                    versionDescriptionFormat: "V4",
+                    sleepTime: '10',
+                    checkHealth: 'true',
+                    maxAttempts: '12'
+                  ])
+        }
       }
-    }
 
-    stage('Deploy to EBS') {
-      steps {
-        awsebReleaser(credentialId: 'qa-tutor', awsRegion: 'eu-west-2', applicationName: 'quiz-api-ajb', environmentId: 'e-pepkykhj6m', versionLabel: 'Sample Application')
+      stage('Deploy to EBS') {
+        steps {
+          awsebReleaser(credentialId: 'qa-tutor', awsRegion: 'eu-west-2', applicationName: 'quiz-api-ajb', environmentId: 'e-pepkykhj6m', versionLabel: 'Sample Application')
+        }
       }
+
     }
-    
+    environment {
+      HOME = '.'
+    }
   }
-  environment {
-    HOME = '.'
-  }
-}
