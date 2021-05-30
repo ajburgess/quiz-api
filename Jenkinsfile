@@ -40,11 +40,12 @@ zip ../app.zip -r *'''
 
     stage('Create version') {
       steps {
-        withEnv(['AWS_ACCESS_KEY_ID=99999999', 'AWS_SECRET_ACCESS_KEY=ABCD234']) {
-          sh '''echo ${AWS_ACCESS_KEY_ID}'''
-          sh '''echo ${AWS_SECRET_ACCESS_KEY}'''
+        withEnv(overrides: ['AWS_ACCESS_KEY_ID=99999999', 'AWS_SECRET_ACCESS_KEY=ABCD234']) {
+          sh 'echo ${AWS_ACCESS_KEY_ID}'
+          sh 'echo ${AWS_SECRET_ACCESS_KEY}'
           ebCreateApplicationVersion(applicationName: 'quiz-api-ajb', versionLabel: 'FromS3', s3Bucket: 'quiz-api-deploy', s3Key: 'app.zip')
         }
+
       }
     }
 
