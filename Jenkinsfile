@@ -41,19 +41,19 @@ zip ../app.zip -r *'''
     stage('Create version') {
       steps {
         step([
-                    $class: 'AWSEBDeploymentBuilder',
-                    credentialId: "qa-tutor",
-                    awsRegion: 'eu-west-2',
-                    applicationName: 'quiz-api-ajb',
-                    environmentName: 'quizapiajb-prod',
-                    rootObject: '.',
-                    includes: 'package*.json, src/*',
-                    excludes: '',
-                    bucketName: 'quiz-api-deploy',
-                    keyPrefix: '',
-                    versionLabelFormat: "V5",
-                    versionDescriptionFormat: "V5"
-                  ])
+                              $class: 'AWSEBDeploymentBuilder',
+                              credentialId: "qa-tutor",
+                              awsRegion: 'eu-west-2',
+                              applicationName: 'quiz-api-ajb',
+                              environmentName: 'quizapiajb-prod',
+                              rootObject: '.',
+                              includes: 'package*.json, src/*',
+                              excludes: '',
+                              bucketName: 'quiz-api-deploy',
+                              keyPrefix: '',
+                              versionLabelFormat: "V5",
+                              versionDescriptionFormat: "V5"
+                            ])
         }
       }
 
