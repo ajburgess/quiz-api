@@ -40,12 +40,23 @@ zip ../app.zip -r *'''
 
     stage('Create version') {
       steps {
-        withEnv(overrides: ['AWS_ACCESS_KEY_ID=99999999', 'AWS_SECRET_ACCESS_KEY=ABCD234']) {
-          sh 'echo ${AWS_ACCESS_KEY_ID}'
-          sh 'echo ${AWS_SECRET_ACCESS_KEY}'
-          ebCreateApplicationVersion(applicationName: 'quiz-api-ajb', versionLabel: 'FromS3', s3Bucket: 'quiz-api-deploy', s3Key: 'app.zip')
-        }
-
+        step([
+          $class: 'AWSEBDeploymentBuilder',
+          credentialId: "qa-tutor",
+          awsRegion: 'eu-west-2',
+          applicationName: 'quiz-api-ajb',
+          environmentName: 'quizapiajb-prod',
+          rootObject: '.',
+          includes: 'package*.json, **/*',
+          excludes: '',
+          bucketName: 'quiz-api-deploy',
+          keyPrefix: '',
+          versionLabelFormat: "V4",
+          versionDescriptionFormat: "V4",
+          sleepTime: '10',
+          checkHealth: 'true',
+          maxAttempts: '12'
+        ])
       }
     }
 
@@ -54,7 +65,7 @@ zip ../app.zip -r *'''
         awsebReleaser(credentialId: 'qa-tutor', awsRegion: 'eu-west-2', applicationName: 'quiz-api-ajb', environmentId: 'e-pepkykhj6m', versionLabel: 'Sample Application')
       }
     }
-
+    
   }
   environment {
     HOME = '.'
