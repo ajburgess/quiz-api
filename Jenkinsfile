@@ -40,13 +40,12 @@ zip ../app.zip -r *'''
 
     stage('Create version') {
       steps {
-        withCredentials(bindings: [aws(credentialsId: 'qa-tutor', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-          sh '''echo ${AWS_ACCESS_KEY_ID}
-echo ${AWS_SECRET_ACCESS_KEY}
+        ebCreateApplicationVersion(applicationName: 'quiz-api-ajb', versionLabel: 'FromS3', s3Bucket: 'quiz-api-deploy', s3Key: 'app.zip')
+        sh '''export AWS_ACCESS_KEY_ID=99999999
+export AWS_SECRET_ACCESS_KEY=ABCD234
 '''
-          ebCreateApplicationVersion(applicationName: 'quiz-api-ajb', versionLabel: 'FromS3', s3Bucket: 'quiz-api-deploy', s3Key: 'app.zip')
-        }
-
+        sh '''echo ${AWS_ACCESS_KEY_ID}
+echo ${AWS_ACCESS_KEY_ID}'''
       }
     }
 
